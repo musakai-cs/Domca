@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36221.1 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domca.Blazor", "Domca.Blazor\Domca.Blazor.csproj", "{A5F98158-CAFE-4A42-B68E-C33C2D09CAA0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domca.API", "Domca.API\Domca.API.csproj", "{9A3E9D64-4EE5-4D00-86EE-19A41C868199}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domca.Core", "Domca.Core\Domca.Core.csproj", "{081DCDDA-62AD-4429-8FDD-EE6AE5D110E5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domca.EntityFrameworkCore", "Domca.EntityFrameworkCore\Domca.EntityFrameworkCore.csproj", "{4DAF8E08-F3A5-4991-B3A7-6E48A19790B6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domca.Tests", "Domca.Tests\Domca.Tests.csproj", "{413A3362-B799-472B-B452-2CAFC90D00D0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A5F98158-CAFE-4A42-B68E-C33C2D09CAA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5F98158-CAFE-4A42-B68E-C33C2D09CAA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5F98158-CAFE-4A42-B68E-C33C2D09CAA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5F98158-CAFE-4A42-B68E-C33C2D09CAA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A3E9D64-4EE5-4D00-86EE-19A41C868199}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A3E9D64-4EE5-4D00-86EE-19A41C868199}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A3E9D64-4EE5-4D00-86EE-19A41C868199}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A3E9D64-4EE5-4D00-86EE-19A41C868199}.Release|Any CPU.Build.0 = Release|Any CPU
+		{081DCDDA-62AD-4429-8FDD-EE6AE5D110E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{081DCDDA-62AD-4429-8FDD-EE6AE5D110E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{081DCDDA-62AD-4429-8FDD-EE6AE5D110E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{081DCDDA-62AD-4429-8FDD-EE6AE5D110E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DAF8E08-F3A5-4991-B3A7-6E48A19790B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DAF8E08-F3A5-4991-B3A7-6E48A19790B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DAF8E08-F3A5-4991-B3A7-6E48A19790B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DAF8E08-F3A5-4991-B3A7-6E48A19790B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{413A3362-B799-472B-B452-2CAFC90D00D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{413A3362-B799-472B-B452-2CAFC90D00D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{413A3362-B799-472B-B452-2CAFC90D00D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{413A3362-B799-472B-B452-2CAFC90D00D0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8FD4EEA9-1C54-4325-93DC-981CB4F96B2E}
+	EndGlobalSection
+EndGlobal
