@@ -1,0 +1,50 @@
+﻿using Domca.EntityFrameworkCore.Configurations;
+using Domca.Core.Entities;
+using Microsoft.EntityFrameworkCore;
+
+namespace Domca.EntityFrameworkCore;
+
+/// <summary>
+/// Represents a session with the database, allowing for querying and saving instances of entities.
+/// </summary>
+/// <remarks>This class is a sealed implementation of <see cref="DbContext"/> and is configured using the provided
+/// <see cref="DbContextOptions{DataContext}"/>. It is typically used to interact with the database in a strongly-typed
+/// manner, leveraging the Entity Framework Core ORM.</remarks>
+public sealed class DataContext : DbContext
+{
+    /// <summary>
+    /// Initializes a new instance of the <see cref="DataContext"/> class using the specified options.
+    /// </summary>
+    /// <remarks>The <paramref name="options"/> parameter allows configuration of the database context, such
+    /// as the connection string and database provider.</remarks>
+    /// <param name="options">The options to be used by the <see cref="DataContext"/>. This parameter is required and cannot be null.</param>
+    public DataContext(DbContextOptions<DataContext> options) : base(options)
+    {
+    }
+
+    /// <summary>
+    /// Gets or sets the collection of users in the database.
+    /// </summary>
+    public DbSet<User> Users { get; set; } = default!;
+
+    /// <summary>
+    /// Gets or sets the collection of user sessions.
+    /// </summary>
+    public DbSet<UserSession> UserSessions { get; set; } = default!;
+
+
+    /// <summary>
+    /// Configures the model that is used by this context.
+    /// </summary>
+    /// <remarks>This method is called when the model for a derived context has been initialized, but before
+    /// the model has been locked down and used to initialize the context. The default implementation of this method
+    /// does nothing, but it can be overridden in a derived class to customize the model.</remarks>
+    /// <param name="modelBuilder">The builder used to construct the model for the context.</param>
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+
+        modelBuilder.ApplyConfiguration(new UserConfiguration());
+        modelBuilder.ApplyConfiguration(new UserSessionConfiguration());
+    }
+}

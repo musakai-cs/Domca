@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Domca.EntityFrameworkCore.Models;
+namespace Domca.Core.Entities;
 
-internal class Marks
+internal class Tracker
 {
 }
