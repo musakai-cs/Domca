@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Domca.Core.Entities.IDs;
+using System.ComponentModel.DataAnnotations;
 
 namespace Domca.Core.Entities;
 
@@ -13,7 +14,7 @@ public sealed class User
     /// <summary>
     /// Unique identifier for the user.
     /// </summary>
-    public Guid Id { get; set; }
+    public UserId Id { get; set; }
 
     /// <summary>
     /// Gets or sets the first name of the user.

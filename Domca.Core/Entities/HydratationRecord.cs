@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domca.Core.Entities.IDs;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -10,5 +11,6 @@ namespace Domca.Core.Entities;
 /// </summary>
 public sealed class HydratationRecord
 {
+    public HydratationRecordId Id { get; set; }
 
 }
