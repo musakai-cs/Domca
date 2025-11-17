@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Domca.Core.Entities.IDs;
+using System.ComponentModel.DataAnnotations;
 
 namespace Domca.Core.Entities;
 
@@ -13,7 +14,7 @@ public sealed class User
     /// <summary>
     /// Unique identifier for the user.
     /// </summary>
-    public Guid Id { get; set; }
+    public UserId Id { get; set; } = UserId.New();
 
     /// <summary>
     /// Gets or sets the first name of the user.
@@ -67,13 +68,18 @@ public sealed class User
     /// </summary>
     public DateTime UpdatedAt { get; set; }
 
-    // Navigation properties
+    // Navigation Properties
     #region Navigation Properties
 
     /// <summary>
     /// Gets or sets the collection of user sessions.
     /// </summary>
     public ICollection<UserSession> Sessions { get; set; } = new List<UserSession>();
+
+    /// <summary>
+    /// Gets or sets the collection of hydration records for the user.
+    /// </summary>
+    public ICollection<HydratationRecord> HydratationRecords { get; set; } = new List<HydratationRecord>();
 
     #endregion
 }

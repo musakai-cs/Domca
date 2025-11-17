@@ -23,15 +23,68 @@ public sealed class DataContext : DbContext
     }
 
     /// <summary>
-    /// Gets or sets the collection of users in the database.
+    /// Gets or sets the collection of users in the database context.
     /// </summary>
+    /// <remarks>This property provides access to query, add, update, or remove user entities within the
+    /// database. Changes made to the collection are tracked by the context and persisted to the database when
+    /// SaveChanges is called.</remarks>
     public DbSet<User> Users { get; set; } = default!;
 
     /// <summary>
-    /// Gets or sets the collection of user sessions.
+    /// Gets or sets the collection of user session entities for querying and saving.
     /// </summary>
+    /// <remarks>Use this property to access, add, update, or remove user session records in the database
+    /// through Entity Framework Core. Changes made to the collection are tracked and persisted when SaveChanges is
+    /// called.</remarks>
     public DbSet<UserSession> UserSessions { get; set; } = default!;
 
+    /// <summary>
+    /// Gets or sets the collection of hydration records in the database.
+    /// </summary>
+    /// <remarks>This property provides access to query, add, update, or remove hydration records using Entity
+    /// Framework Core. Changes made to the collection are tracked and persisted to the database when SaveChanges is
+    /// called.</remarks>
+    public DbSet<HydratationRecord> HydratationRecords { get; set; } = default!;
+
+    /// <summary>
+    /// Gets or sets the collection of teacher entities in the database.
+    /// </summary>
+    /// <remarks>
+    /// Use this property to query, add, update, or remove teacher records in the database
+    /// through Entity Framework Core. Changes made to the collection are tracked and
+    /// persisted when SaveChanges is called.
+    /// </remarks>
+    public DbSet<Teacher> Teachers { get; set; } = default!;
+
+    /// <summary>
+    /// Gets or sets the collection of subject entities in the database.
+    /// </summary>
+    /// <remarks>
+    /// This property provides access to query, add, update, or remove subject records
+    /// using Entity Framework Core. Changes made to the collection are tracked and
+    /// persisted to the database when SaveChanges is called.
+    /// </remarks>
+    public DbSet<Subject> Subjects { get; set; } = default!;
+
+    /// <summary>
+    /// Gets or sets the collection of school year entities in the database.
+    /// </summary>
+    /// <remarks>
+    /// Use this property to query, add, update, or remove school year records in the
+    /// database through Entity Framework Core. Changes made to the collection are tracked
+    /// and persisted when SaveChanges is called.
+    /// </remarks>
+    public DbSet<SchoolYear> SchoolYears { get; set; } = default!;
+
+    /// <summary>
+    /// Gets or sets the collection of mark entities in the database.
+    /// </summary>
+    /// <remarks>
+    /// This property provides access to query, add, update, or remove mark records
+    /// using Entity Framework Core. Changes made to the collection are tracked and
+    /// persisted to the database when SaveChanges is called.
+    /// </remarks>
+    public DbSet<Mark> Marks { get; set; } = default!;
 
     /// <summary>
     /// Configures the model that is used by this context.
@@ -46,5 +99,10 @@ public sealed class DataContext : DbContext
 
         modelBuilder.ApplyConfiguration(new UserConfiguration());
         modelBuilder.ApplyConfiguration(new UserSessionConfiguration());
+        modelBuilder.ApplyConfiguration(new HydratationRecordConfiguration());
+        modelBuilder.ApplyConfiguration(new TeacherConfiguration());
+        modelBuilder.ApplyConfiguration(new SubjectConfiguration());
+        modelBuilder.ApplyConfiguration(new SchoolYearConfiguration());
+        modelBuilder.ApplyConfiguration(new MarkConfiguration());
     }
 }

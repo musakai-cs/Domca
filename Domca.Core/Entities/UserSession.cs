@@ -1,4 +1,6 @@
-﻿namespace Domca.Core.Entities;
+﻿using Domca.Core.Entities.IDs;
+
+namespace Domca.Core.Entities;
 
 /// <summary>
 /// Represents a user session containing authentication and session details.
@@ -11,7 +13,7 @@ public sealed class UserSession
     /// <summary>
     /// Gets or sets the unique identifier for the entity.
     /// </summary>
-    public Guid Id { get; set; }
+    public UserSessionId Id { get; set; } = UserSessionId.New();
 
     /// <summary>
     /// Gets or sets the authentication token used for accessing secured resources.
@@ -21,7 +23,7 @@ public sealed class UserSession
     /// <summary>
     /// Gets or sets the unique identifier for the user.
     /// </summary>
-    public Guid UserId { get; set; }
+    public UserId UserId { get; set; }
 
     /// <summary>
     /// Gets or sets the date and time when the entity was created.
@@ -39,7 +41,7 @@ public sealed class UserSession
     /// <summary>
     /// Gets or sets the associated user entity.
     /// </summary>
-    public User? User { get; set; }
+    public User User { get; set; } = null!;
 
     #endregion
 }

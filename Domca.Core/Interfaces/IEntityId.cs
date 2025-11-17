@@ -8,11 +8,6 @@
 public interface IEntityId<T>
 {
     /// <summary>
-    /// Gets the stored value of the current instance.
-    /// </summary>
-    T Value { get; }
-
-    /// <summary>
     /// Creates a new string instance using a default value or implementation.
     /// </summary>
     /// <returns>A string representing the newly created value. The specific contents depend on the implementation.</returns>

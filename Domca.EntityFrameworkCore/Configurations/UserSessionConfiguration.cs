@@ -1,6 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Domca.Core.Entities;
+using Domca.Core.Entities.IDs;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Domca.Core.Entities;
 
 namespace Domca.EntityFrameworkCore.Configurations;
 
@@ -24,23 +25,18 @@ public sealed class UserSessionConfiguration : IEntityTypeConfiguration<UserSess
     /// <param name="builder">The builder used to configure the entity type.</param>
     public void Configure(EntityTypeBuilder<UserSession> builder)
     {
-        builder.HasKey(s => s.Id);
+        builder.HasKey(us => us.Id);
 
-        builder.Property(s => s.Token)
-            .IsRequired();
+        builder.Property(us => us.Id)
+               .HasConversion(id => id.Value, value => new UserSessionId(value));
 
-        builder.Property(s => s.UserId)
-            .IsRequired();
+        builder.Property(us => us.UserId)
+               .HasConversion(id => id.Value, value => new UserId(value));
 
-        builder.Property(s => s.CreatedAt)
-            .IsRequired();
+        builder.Property(us => us.Token).IsRequired().HasMaxLength(512);
 
-        builder.Property(s => s.ExpiresAt)
-            .IsRequired();
-
-        builder.HasOne(s => s.User)
-            .WithMany(u => u.Sessions)
-            .HasForeignKey(s => s.UserId)
-            .OnDelete(DeleteBehavior.Cascade);
+        builder.HasOne(us => us.User)
+               .WithMany(u => u.Sessions)
+               .HasForeignKey(us => us.UserId);
     }
 }
