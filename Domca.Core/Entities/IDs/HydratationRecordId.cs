@@ -1,4 +1,4 @@
-﻿using Domca.Core.Helpers;
+﻿using Domca.Core.Generators;
 using Domca.Core.Interfaces;
 
 namespace Domca.Core.Entities.IDs;
@@ -8,7 +8,7 @@ namespace Domca.Core.Entities.IDs;
 /// </summary>
 /// <remarks>Use this type to reference or distinguish individual hydration records within the system. Instances
 /// of this class are typically used as keys or identifiers in data operations involving hydration records.</remarks>
-public readonly struct HydratationRecordId(string Value) : IEntityId<HydratationRecordId>
+public readonly record struct HydratationRecordId(string Value) : IEntityId<HydratationRecordId>
 {
     private const string Prefix = "HR";
 
@@ -17,10 +17,7 @@ public readonly struct HydratationRecordId(string Value) : IEntityId<Hydratation
     /// </summary>
     /// <returns>A new instance of <see cref="HydratationRecordId"/> with a unique identifier.</returns>
     public static HydratationRecordId New()
-    {
-        var suffix = IdGeneratorHelper.GenerateSuffix();
-        return new HydratationRecordId($"{Prefix}{suffix}");
-    }
+        => new HydratationRecordId(EntityIdGenerator.Generate(Prefix));
 
     /// <summary>
     /// Returns a string that represents the current object.

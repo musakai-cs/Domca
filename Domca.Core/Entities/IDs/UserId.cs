@@ -1,4 +1,4 @@
-﻿using Domca.Core.Helpers;
+﻿using Domca.Core.Generators;
 using Domca.Core.Interfaces;
 
 namespace Domca.Core.Entities.IDs;
@@ -7,7 +7,7 @@ namespace Domca.Core.Entities.IDs;
 /// Represents a strongly-typed identifier for a user entity.
 /// </summary>
 /// <param name="Value">The string value that uniquely identifies the user. Must be non-null and conform to the expected identifier format.</param>
-public readonly struct UserId(string Value) : IEntityId<UserId>
+public readonly record struct UserId(string Value) : IEntityId<UserId>
 {
     private const string Prefix = "USR";
 
@@ -19,10 +19,7 @@ public readonly struct UserId(string Value) : IEntityId<UserId>
     /// <returns>A <see cref="HydratationRecordId"/> representing a newly generated identifier. Each call returns a distinct
     /// value.</returns>
     public static UserId New()
-    {
-        var suffix = IdGeneratorHelper.GenerateSuffix();
-        return new UserId($"{Prefix}{suffix}");
-    }
+        => new UserId(EntityIdGenerator.Generate(Prefix));
 
     /// <summary>
     /// Returns a string that represents the current object.

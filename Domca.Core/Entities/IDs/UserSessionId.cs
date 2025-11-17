@@ -1,4 +1,4 @@
-﻿using Domca.Core.Helpers;
+﻿using Domca.Core.Generators;
 using Domca.Core.Interfaces;
 
 namespace Domca.Core.Entities.IDs;
@@ -10,7 +10,7 @@ namespace Domca.Core.Entities.IDs;
 /// application. Each identifier is guaranteed to be unique within the application's context.</remarks>
 /// <param name="Value">The string value that uniquely identifies the user session. Must be non-null and conform to the expected session
 /// identifier format.</param>
-public readonly struct UserSessionId(string Value) : IEntityId<UserSessionId>
+public readonly record struct UserSessionId(string Value) : IEntityId<UserSessionId>
 {
     private const string Prefix = "USESS";
 
@@ -21,10 +21,7 @@ public readonly struct UserSessionId(string Value) : IEntityId<UserSessionId>
     /// generated identifier is guaranteed to be unique within the application's context.</remarks>
     /// <returns>A <see cref="UserSessionId"/> instance representing a newly generated session identifier.</returns>
     public static UserSessionId New()
-    {
-        var suffix = IdGeneratorHelper.GenerateSuffix();
-        return new UserSessionId($"{Prefix}{suffix}");
-    }
+        => new UserSessionId(EntityIdGenerator.Generate(Prefix));
 
     /// <summary>
     /// Returns a string that represents the current object.

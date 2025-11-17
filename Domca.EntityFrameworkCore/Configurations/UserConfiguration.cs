@@ -1,6 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Domca.Core.Entities;
+using Domca.Core.Entities.IDs;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Domca.Core.Entities;
 
 namespace Domca.EntityFrameworkCore.Configurations;
 
@@ -9,7 +10,7 @@ namespace Domca.EntityFrameworkCore.Configurations;
 /// </summary>
 /// <remarks>This configuration class sets up the properties and relationships for the <see cref="User"/> entity,
 /// including primary key, required fields, maximum lengths, and relationships with other entities.</remarks>
-public class UserConfiguration : IEntityTypeConfiguration<User>
+public sealed class UserConfiguration : IEntityTypeConfiguration<User>
 {
     /// <summary>
     /// Configures the entity of type <see cref="User"/> by setting up its properties and relationships.
@@ -22,39 +23,21 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
     {
         builder.HasKey(u => u.Id);
 
-        builder.Property(u => u.FirstName)
-            .IsRequired()
-            .HasMaxLength(50);
+        builder.Property(u => u.Id)
+               .HasConversion(id => id.Value, value => new UserId(value));
 
-        builder.Property(u => u.LastName)
-            .IsRequired()
-            .HasMaxLength(50);
-
-        builder.Property(u => u.UserName)
-            .IsRequired()
-            .HasMaxLength(50);
-
-        builder.Property(u => u.EmailAddress)
-            .IsRequired();
-
-        builder.Property(u => u.EmailAddressNormalized)
-            .IsRequired();
-
-        builder.Property(u => u.PasswordHash)
-            .IsRequired();
-
-        builder.Property(u => u.PasswordSalt)
-            .IsRequired();
-
-        builder.Property(u => u.CreatedAt)
-            .IsRequired();
-
-        builder.Property(u => u.UpdatedAt)
-            .IsRequired();
+        builder.Property(u => u.FirstName).IsRequired().HasMaxLength(100);
+        builder.Property(u => u.LastName).IsRequired().HasMaxLength(100);
+        builder.Property(u => u.UserName).IsRequired().HasMaxLength(50);
+        builder.Property(u => u.EmailAddress).IsRequired().HasMaxLength(255);
+        builder.Property(u => u.EmailAddressNormalized).IsRequired().HasMaxLength(255);
 
         builder.HasMany(u => u.Sessions)
-            .WithOne(s => s.User)
-            .HasForeignKey(s => s.UserId)
-            .OnDelete(DeleteBehavior.Cascade);
+               .WithOne(s => s.User)
+               .HasForeignKey(s => s.UserId);
+
+        builder.HasMany(u => u.HydrationRecords)
+               .WithOne(hr => hr.User)
+               .HasForeignKey(hr => hr.UserId);
     }
 }

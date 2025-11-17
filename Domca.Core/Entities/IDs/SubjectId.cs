@@ -1,4 +1,4 @@
-﻿using Domca.Core.Helpers;
+﻿using Domca.Core.Generators;
 using Domca.Core.Interfaces;
 
 namespace Domca.Core.Entities.IDs;
@@ -10,7 +10,7 @@ namespace Domca.Core.Entities.IDs;
 /// immutable and can be compared for equality. The identifier value is expected to follow a specific format, typically
 /// starting with the "SUB" prefix.</remarks>
 /// <param name="Value">The unique identifier value for the subject. Must be a non-empty string prefixed with "SUB".</param>
-public readonly struct SubjectId(string Value) : IEntityId<SubjectId>
+public readonly record struct SubjectId(string Value) : IEntityId<SubjectId>
 {
     private const string Prefix = "SUB";
 
@@ -21,10 +21,7 @@ public readonly struct SubjectId(string Value) : IEntityId<SubjectId>
     /// suffix. Each call returns a distinct value suitable for identifying subjects within the system.</remarks>
     /// <returns>A <see cref="SubjectId"/> containing a newly generated unique identifier.</returns>
     public static SubjectId New()
-    {
-        var suffix = IdGeneratorHelper.GenerateSuffix();
-        return new SubjectId($"{Prefix}{suffix}");
-    }
+        => new SubjectId(EntityIdGenerator.Generate(Prefix));
 
     /// <summary>
     /// Returns a string that represents the current object.
