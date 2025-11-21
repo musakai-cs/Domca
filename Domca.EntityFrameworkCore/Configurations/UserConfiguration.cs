@@ -39,5 +39,15 @@ public sealed class UserConfiguration : IEntityTypeConfiguration<User>
         builder.HasMany(u => u.HydrationRecords)
                .WithOne(hr => hr.User)
                .HasForeignKey(hr => hr.UserId);
+
+
+        // Indexing
+        #region Indexing
+
+        builder.HasIndex(u => u.UserName).IsUnique();
+        builder.HasIndex(u => u.EmailAddressNormalized).IsUnique();
+        builder.HasIndex(u => u.CreatedAt);
+
+        #endregion
     }
 }

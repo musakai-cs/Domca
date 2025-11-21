@@ -36,5 +36,14 @@ public class HydrationRecordConfiguration : IEntityTypeConfiguration<HydrationRe
         builder.HasOne(hr => hr.User)
                .WithMany(u => u.HydrationRecords)
                .HasForeignKey(hr => hr.UserId);
+
+
+        // Indexing
+        #region Indexing
+
+        builder.HasIndex(hr => new { hr.UserId, hr.Date });
+        builder.HasIndex(hr => hr.Date);
+
+        #endregion
     }
 }
