@@ -14,7 +14,7 @@ namespace Domca.EntityFrameworkCore.Configurations;
 public class HydratationRecordConfiguration : IEntityTypeConfiguration<HydratationRecord>
 {
     /// <summary>
-    /// Configures the entity mapping for the HydrtaationRecord type within the Entity Framework model builder.
+    /// Configures the entity mapping for the HydratationRecord type within the Entity Framework model builder.
     /// </summary>
     /// <remarks>This method sets up key properties, value conversions, required fields, and relationships for
     /// HydrationRecord entities. It should be called from the OnModelCreating method when customizing the model for
