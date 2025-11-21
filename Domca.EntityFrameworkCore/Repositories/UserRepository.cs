@@ -13,7 +13,7 @@ namespace Domca.EntityFrameworkCore.Repositories;
 /// session data where applicable. Ensure that the <see cref="DataContext"/> is properly configured for asynchronous
 /// operations before using this repository.</remarks>
 /// <param name="context"></param>
-public class UserRepository(DataContext context) : IUserRepository
+public sealed class UserRepository(DataContext context) : IUserRepository
 {
     private readonly DataContext _context = context ?? throw new ArgumentNullException(nameof(context));
 
