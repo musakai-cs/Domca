@@ -1,4 +1,5 @@
 ﻿using Domca.Core.Entities;
+using Domca.Core.Entities.IDs;
 
 namespace Domca.Core.Repositories;
 
@@ -16,7 +17,7 @@ public interface IUserRepository
     /// <param name="id">The unique identifier of the user to retrieve.</param>
     /// <returns>A task that represents the asynchronous operation. The task result contains the user with the specified
     /// identifier, or <see langword="null"/> if no user is found.</returns>
-    Task<User?> GetByIdAsync(Guid id);
+    Task<User?> GetByIdAsync(UserId id);
     /// <summary>
     /// Asynchronously retrieves all users from the data store.
     /// </summary>
@@ -37,5 +38,5 @@ public interface IUserRepository
     /// Asynchronously deletes a user from the data store.
     /// </summary>
     /// <param name="id">The unique identifier of the user to delete.</param>
-    Task DeleteAsync(Guid id);
+    Task DeleteAsync(UserId id);
 }

@@ -12,12 +12,9 @@ public readonly record struct UserId(string Value) : IEntityId<UserId>
     private const string Prefix = "USR";
 
     /// <summary>
-    /// Creates a new, unique instance of the <see cref="UserId"/> class.
+    /// Creates a new unique <see cref="UserId"/> instance.
     /// </summary>
-    /// <remarks>Use this method when a new hydratation record needs a unique identifier. The generated ID is
-    /// suitable for use as a primary key or for tracking individual records.</remarks>
-    /// <returns>A <see cref="HydratationRecordId"/> representing a newly generated identifier. Each call returns a distinct
-    /// value.</returns>
+    /// <returns>A <see cref="UserId"/> representing a newly generated unique identifier.</returns>
     public static UserId New()
         => new UserId(EntityIdGenerator.Generate(Prefix));
 
