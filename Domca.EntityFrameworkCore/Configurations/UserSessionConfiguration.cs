@@ -38,5 +38,15 @@ public sealed class UserSessionConfiguration : IEntityTypeConfiguration<UserSess
         builder.HasOne(us => us.User)
                .WithMany(u => u.Sessions)
                .HasForeignKey(us => us.UserId);
+
+
+        // Indexing
+        #region Indexing
+
+        builder.HasIndex(us => us.Token).IsUnique();
+        builder.HasIndex(us => new { us.UserId, us.ExpiresAt });
+        builder.HasIndex(us => us.ExpiresAt);
+
+        #endregion
     }
 }
