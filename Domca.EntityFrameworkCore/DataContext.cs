@@ -44,7 +44,7 @@ public sealed class DataContext : DbContext
     /// <remarks>This property provides access to query, add, update, or remove hydration records using Entity
     /// Framework Core. Changes made to the collection are tracked and persisted to the database when SaveChanges is
     /// called.</remarks>
-    public DbSet<HydratationRecord> HydratationRecords { get; set; } = default!;
+    public DbSet<HydrationRecord> HydrationRecords { get; set; } = default!;
 
     /// <summary>
     /// Configures the model that is used by this context.
@@ -59,6 +59,6 @@ public sealed class DataContext : DbContext
 
         modelBuilder.ApplyConfiguration(new UserConfiguration());
         modelBuilder.ApplyConfiguration(new UserSessionConfiguration());
-        modelBuilder.ApplyConfiguration(new HydratationRecordConfiguration());
+        modelBuilder.ApplyConfiguration(new HydrationRecordConfiguration());
     }
 }

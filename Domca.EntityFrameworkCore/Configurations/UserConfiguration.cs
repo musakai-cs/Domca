@@ -36,7 +36,7 @@ public sealed class UserConfiguration : IEntityTypeConfiguration<User>
                .WithOne(s => s.User)
                .HasForeignKey(s => s.UserId);
 
-        builder.HasMany(u => u.HydratationRecords)
+        builder.HasMany(u => u.HydrationRecords)
                .WithOne(hr => hr.User)
                .HasForeignKey(hr => hr.UserId);
     }
