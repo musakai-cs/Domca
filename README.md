@@ -1,4 +1,4 @@
-﻿# 🥤 Domča – Hydratation Tracker
+﻿# 🥤 Domča – Hydration Tracker
 
 [![.NET Core Build](https://github.com/musakai/Domca/actions/workflows/build.yaml/badge.svg)](https://github.com/musakai/Domca/actions/workflows/build.yaml)
 ![.NET](https://img.shields.io/badge/.NET-10-blueviolet)
@@ -6,7 +6,7 @@
 ![EF Core](https://img.shields.io/badge/EF_Core-10.0-green)
 ![Docker](https://img.shields.io/badge/Docker-enabled-blue)
 
-A lightweight hydratation tracking app built with **Blazor WebAssembly** and **ASP.NET Core Web API**, designed for exactly two users.  
+A lightweight Hydration tracking app built with **Blazor WebAssembly** and **ASP.NET Core Web API**, designed for exactly two users.  
 Created as a personal wellness tool to monitor daily water intake with clarity and simplicity.
 
 ---

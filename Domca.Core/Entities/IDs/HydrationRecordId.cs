@@ -8,16 +8,16 @@ namespace Domca.Core.Entities.IDs;
 /// </summary>
 /// <remarks>Use this type to reference or distinguish individual hydration records within the system. Instances
 /// of this class are typically used as keys or identifiers in data operations involving hydration records.</remarks>
-public readonly record struct HydratationRecordId(string Value) : IEntityId<HydratationRecordId>
+public readonly record struct HydrationRecordId(string Value) : IEntityId<HydrationRecordId>
 {
     private const string Prefix = "HR";
 
     /// <summary>
-    /// Creates a new <see cref="HydratationRecordId"/> instance using a default value or implementation.
+    /// Creates a new <see cref="HydrationRecordId"/> instance using a default value or implementation.
     /// </summary>
-    /// <returns>A new instance of <see cref="HydratationRecordId"/> with a unique identifier.</returns>
-    public static HydratationRecordId New()
-        => new HydratationRecordId(EntityIdGenerator.Generate(Prefix));
+    /// <returns>A new instance of <see cref="HydrationRecordId"/> with a unique identifier.</returns>
+    public static HydrationRecordId New()
+        => new HydrationRecordId(EntityIdGenerator.Generate(Prefix));
 
     /// <summary>
     /// Returns a string that represents the current object.

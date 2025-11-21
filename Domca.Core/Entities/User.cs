@@ -79,7 +79,7 @@ public sealed class User
     /// <summary>
     /// Gets or sets the collection of hydration records for the user.
     /// </summary>
-    public ICollection<HydratationRecord> HydratationRecords { get; set; } = new List<HydratationRecord>();
+    public ICollection<HydrationRecord> HydrationRecords { get; set; } = new List<HydrationRecord>();
 
     #endregion
 }

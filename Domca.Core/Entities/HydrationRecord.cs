@@ -10,12 +10,12 @@ namespace Domca.Core.Entities;
 /// This entity captures the amount of water consumed by a user on a specific date.
 /// It is designed to support health and fitness tracking functionalities.
 /// </remarks>
-public sealed class HydratationRecord
+public sealed class HydrationRecord
 {
     /// <summary>
     /// Gets or sets the unique identifier for this hydration record.
     /// </summary>
-    public HydratationRecordId Id { get; set; } = HydratationRecordId.New();
+    public HydrationRecordId Id { get; set; } = HydrationRecordId.New();
 
     // Scalar properties
     /// <summary>
