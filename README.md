@@ -27,12 +27,12 @@ The solution consists of five modular projects:
 
 | Project                     | Purpose                                      |
 |-----------------------------|----------------------------------------------|
-| `Domea.API`                 | Web API                                      |
-| `Domea.Blazor`              | Blazor WebAssembly frontend                  |
-| `Domea.Core`                | Domain models, DTOs, interfaces, helpers     |
-| `Domea.EntityFrameworkCore` | EF Core setup and migrations                 |
-| `Domea.Repositories`        | Repository implementations                   |
-| `Domea.Tests`               | Unit tests and test data context             |
+| `Domca.API`                 | Web API                                      |
+| `Domca.Blazor`              | Blazor WebAssembly frontend                  |
+| `Domca.Core`                | Domain models, DTOs, interfaces, helpers     |
+| `Domca.EntityFrameworkCore` | EF Core setup and migrations                 |
+| `Domca.Repositories`        | Repository implementations                   |
+| `Domca.Tests`               | Unit tests and test data context             |
 
 ---
 
