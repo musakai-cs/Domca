@@ -12,9 +12,9 @@ public readonly record struct TeacherId(string Value) : IEntityId<TeacherId>
     private const string Prefix = "TCHR";
 
     /// <summary>
-    /// Creates a new, unique instance of the TeacherId class.
+    /// Creates a new unique <see cref="TeacherId"/> instance.
     /// </summary>
-    /// <returns>A TeacherId representing a newly generated unique identifier.</returns>
+    /// <returns>A <see cref="TeacherId"/> representing a newly generated unique identifier.</returns>
     public static TeacherId New()
         => new TeacherId(EntityIdGenerator.Generate(Prefix));
 

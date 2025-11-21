@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 namespace Domca.EntityFrameworkCore.Configurations;
 
 /// <summary>
-/// Provides configuration for the HydrationRecord entity type within the Entity Framework model.
+/// Provides configuration for the HydratationRecord entity type within the Entity Framework model.
 /// </summary>
 /// <remarks>This class is typically used to define entity mapping, relationships, and constraints for
 /// HydrationRecord when using Entity Framework Core's fluent API. It is intended to be used in the OnModelCreating
@@ -14,12 +14,12 @@ namespace Domca.EntityFrameworkCore.Configurations;
 public class HydratationRecordConfiguration : IEntityTypeConfiguration<HydratationRecord>
 {
     /// <summary>
-    /// Configures the entity mapping for the HydrationRecord type within the Entity Framework model builder.
+    /// Configures the entity mapping for the HydrtaationRecord type within the Entity Framework model builder.
     /// </summary>
     /// <remarks>This method sets up key properties, value conversions, required fields, and relationships for
     /// HydrationRecord entities. It should be called from the OnModelCreating method when customizing the model for
     /// database persistence.</remarks>
-    /// <param name="builder">The EntityTypeBuilder instance used to define the HydrationRecord entity's schema and relationships.</param>
+    /// <param name="builder">The EntityTypeBuilder instance used to define the HydratationRecord entity's schema and relationships.</param>
     public void Configure(EntityTypeBuilder<HydratationRecord> builder)
     {
         builder.HasKey(hr => hr.Id);
