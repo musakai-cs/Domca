@@ -46,7 +46,6 @@ public sealed class UserConfiguration : IEntityTypeConfiguration<User>
 
         builder.HasIndex(u => u.UserName).IsUnique();
         builder.HasIndex(u => u.EmailAddressNormalized).IsUnique();
-        builder.HasIndex(u => u.CreatedAt);
 
         #endregion
     }
