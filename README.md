@@ -1,3 +1,55 @@
-﻿# Domča
+﻿# 🥤 Domča – Hydratation Tracker
 
 [![.NET Core Build](https://github.com/musakai/Domca/actions/workflows/build.yaml/badge.svg)](https://github.com/musakai/Domca/actions/workflows/build.yaml)
+![.NET](https://img.shields.io/badge/.NET-10-blueviolet)
+![Blazor](https://img.shields.io/badge/Blazor-WASM-purple)
+![EF Core](https://img.shields.io/badge/EF_Core-10.0-green)
+![Docker](https://img.shields.io/badge/Docker-enabled-blue)
+
+A lightweight hydratation tracking app built with **Blazor WebAssembly** and **ASP.NET Core Web API**, designed for exactly two users.  
+Created as a personal wellness tool to monitor daily water intake with clarity and simplicity.
+
+---
+
+## 🚀 Tech Stack
+
+- **.NET 10** – unified platform for backend and frontend
+- **Blazor WebAssembly** – client-side UI running in the browser
+- **ASP.NET Core Web API** – RESTful backend
+- **Entity Framework Core** – ORM for data access
+- **Docker** – containerized deployment
+
+---
+
+## 📁 Solution Structure
+
+The solution consists of five modular projects:
+
+| Project                     | Purpose                                      |
+|-----------------------------|----------------------------------------------|
+| `Domea.API`                 | Web API                                      |
+| `Domea.Blazor`              | Blazor WebAssembly frontend                  |
+| `Domea.Core`                | Domain models, DTOs, interfaces, helpers     |
+| `Domea.EntityFrameworkCore` | EF Core setup and migrations                 |
+| `Domea.Repositories`        | Repository implementations                   |
+| `Domea.Tests`               | Unit tests and test data context             |
+
+---
+
+## ⚙️ Running the App
+
+### Locally
+
+1. Install [.NET 10 SDK](https://dotnet.microsoft.com).
+2. Restore and build the solution:
+   ```bash
+   dotnet restore
+   dotnet build
+   dotnet run --project src/Domea.API
+3. The Blazor frontend will launch with the API.
+
+### With Docker
+1. Make sure Docker is installed.
+2. Run: `docker-compose up --build`
+3. Access the app at http://localhost:5000.
+
