@@ -11,7 +11,7 @@ namespace Domca.EntityFrameworkCore.Configurations;
 /// <remarks>This class is typically used to define entity mapping, relationships, and constraints for
 /// HydrationRecord when using Entity Framework Core's fluent API. It is intended to be used in the OnModelCreating
 /// method of a DbContext.</remarks>
-public class HydrationRecordConfiguration : IEntityTypeConfiguration<HydrationRecord>
+public sealed class HydrationRecordConfiguration : IEntityTypeConfiguration<HydrationRecord>
 {
     /// <summary>
     /// Configures the entity mapping for the HydrationRecord type within the Entity Framework model builder.
