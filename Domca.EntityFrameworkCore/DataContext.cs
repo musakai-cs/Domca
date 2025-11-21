@@ -47,46 +47,6 @@ public sealed class DataContext : DbContext
     public DbSet<HydratationRecord> HydratationRecords { get; set; } = default!;
 
     /// <summary>
-    /// Gets or sets the collection of teacher entities in the database.
-    /// </summary>
-    /// <remarks>
-    /// Use this property to query, add, update, or remove teacher records in the database
-    /// through Entity Framework Core. Changes made to the collection are tracked and
-    /// persisted when SaveChanges is called.
-    /// </remarks>
-    public DbSet<Teacher> Teachers { get; set; } = default!;
-
-    /// <summary>
-    /// Gets or sets the collection of subject entities in the database.
-    /// </summary>
-    /// <remarks>
-    /// This property provides access to query, add, update, or remove subject records
-    /// using Entity Framework Core. Changes made to the collection are tracked and
-    /// persisted to the database when SaveChanges is called.
-    /// </remarks>
-    public DbSet<Subject> Subjects { get; set; } = default!;
-
-    /// <summary>
-    /// Gets or sets the collection of school year entities in the database.
-    /// </summary>
-    /// <remarks>
-    /// Use this property to query, add, update, or remove school year records in the
-    /// database through Entity Framework Core. Changes made to the collection are tracked
-    /// and persisted when SaveChanges is called.
-    /// </remarks>
-    public DbSet<SchoolYear> SchoolYears { get; set; } = default!;
-
-    /// <summary>
-    /// Gets or sets the collection of mark entities in the database.
-    /// </summary>
-    /// <remarks>
-    /// This property provides access to query, add, update, or remove mark records
-    /// using Entity Framework Core. Changes made to the collection are tracked and
-    /// persisted to the database when SaveChanges is called.
-    /// </remarks>
-    public DbSet<Mark> Marks { get; set; } = default!;
-
-    /// <summary>
     /// Configures the model that is used by this context.
     /// </summary>
     /// <remarks>This method is called when the model for a derived context has been initialized, but before
@@ -100,9 +60,5 @@ public sealed class DataContext : DbContext
         modelBuilder.ApplyConfiguration(new UserConfiguration());
         modelBuilder.ApplyConfiguration(new UserSessionConfiguration());
         modelBuilder.ApplyConfiguration(new HydratationRecordConfiguration());
-        modelBuilder.ApplyConfiguration(new TeacherConfiguration());
-        modelBuilder.ApplyConfiguration(new SubjectConfiguration());
-        modelBuilder.ApplyConfiguration(new SchoolYearConfiguration());
-        modelBuilder.ApplyConfiguration(new MarkConfiguration());
     }
 }
