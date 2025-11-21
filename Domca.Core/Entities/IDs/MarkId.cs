@@ -13,12 +13,11 @@ public readonly record struct MarkId(string Value) : IEntityId<MarkId>
     private const string Prefix = "MARK";
 
     /// <summary>
-    /// Creates a new instance of the <see cref="MarkId"/> type with a unique identifier value.
+    /// Creates a new unique instance of the <see cref="MarkId"/> type.
     /// </summary>
-    /// <remarks>This method guarantees that each returned <see cref="MarkId"/> is unique within the
-    /// application's context. Use this method when a distinct identifier is required for marking or tracking
-    /// purposes.</remarks>
-    /// <returns>A <see cref="MarkId"/> containing a newly generated unique identifier.</returns>
+    /// <remarks>Each call to this method returns a distinct <see cref="MarkId"/> value. This method is
+    /// thread-safe and suitable for generating identifiers in concurrent scenarios.</remarks>
+    /// <returns>A <see cref="MarkId"/> representing a newly generated unique identifier.</returns>
     public static MarkId New()
             => new MarkId(EntityIdGenerator.Generate(Prefix));
 
