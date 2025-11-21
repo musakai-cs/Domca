@@ -15,11 +15,9 @@ public readonly record struct SubjectId(string Value) : IEntityId<SubjectId>
     private const string Prefix = "SUB";
 
     /// <summary>
-    /// Creates a new instance of the <see cref="SubjectId"/> class with a unique identifier value.
+    /// Creates a new unique <see cref="SubjectId"/> identifier.
     /// </summary>
-    /// <remarks>This method generates a unique identifier by combining a predefined prefix with a generated
-    /// suffix. Each call returns a distinct value suitable for identifying subjects within the system.</remarks>
-    /// <returns>A <see cref="SubjectId"/> containing a newly generated unique identifier.</returns>
+    /// <returns>A <see cref="SubjectId"/> representing a newly generated unique identifier.</returns>
     public static SubjectId New()
         => new SubjectId(EntityIdGenerator.Generate(Prefix));
 

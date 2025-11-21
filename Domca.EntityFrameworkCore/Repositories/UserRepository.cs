@@ -1,6 +1,7 @@
 ﻿using Domca.Core.Repositories;
 using Domca.Core.Entities;
 using Microsoft.EntityFrameworkCore;
+using Domca.Core.Entities.IDs;
 
 namespace Domca.EntityFrameworkCore.Repositories;
 
@@ -24,7 +25,7 @@ public class UserRepository(DataContext context) : IUserRepository
     /// <param name="id">The unique identifier of the user to retrieve.</param>
     /// <returns>A task that represents the asynchronous operation. The task result contains the user with the specified
     /// identifier, or <see langword="null"/> if no user is found.</returns>
-    public async Task<User?> GetByIdAsync(Guid id)
+    public async Task<User?> GetByIdAsync(UserId id)
     {
         return await _context.Users
             .Include(u => u.Sessions)
@@ -85,7 +86,7 @@ public class UserRepository(DataContext context) : IUserRepository
     /// taken.</remarks>
     /// <param name="id">The unique identifier of the user to be deleted.</param>
     /// <returns>A task that represents the asynchronous delete operation.</returns>
-    public async Task DeleteAsync(Guid id)
+    public async Task DeleteAsync(UserId id)
     {
         var user = await _context.Users.FindAsync(id);
         if (user != null)

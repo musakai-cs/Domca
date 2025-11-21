@@ -13,9 +13,9 @@ public readonly record struct SchoolYearId(string Value) : IEntityId<SchoolYearI
     private const string Prefix = "SY";
 
     /// <summary>
-    /// Creates a new, unique instance of the SchoolYearId identifier.
+    /// Creates a new unique instance of the <see cref="SchoolYearId"/> identifier.
     /// </summary>
-    /// <returns>A SchoolYearId representing a newly generated, unique school year identifier.</returns>
+    /// <returns>A <see cref="SchoolYearId"/> representing a newly generated unique identifier.</returns>
     public static SchoolYearId New()
             => new SchoolYearId(EntityIdGenerator.Generate(Prefix));
 
