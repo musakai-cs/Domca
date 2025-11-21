@@ -15,11 +15,9 @@ public readonly record struct UserSessionId(string Value) : IEntityId<UserSessio
     private const string Prefix = "USESS";
 
     /// <summary>
-    /// Creates a new, unique user session identifier.
+    /// Creates a new unique <see cref="UserSessionId"/> identifier.
     /// </summary>
-    /// <remarks>Each call returns a distinct identifier suitable for tracking individual user sessions. The
-    /// generated identifier is guaranteed to be unique within the application's context.</remarks>
-    /// <returns>A <see cref="UserSessionId"/> instance representing a newly generated session identifier.</returns>
+    /// <returns>A <see cref="UserSessionId"/> instance representing a newly generated identifier.</returns>
     public static UserSessionId New()
         => new UserSessionId(EntityIdGenerator.Generate(Prefix));
 
