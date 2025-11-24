@@ -49,7 +49,7 @@ The solution consists of five modular projects:
    ```bash
    dotnet restore
    dotnet build
-   dotnet run --project src/Domea.API
+   dotnet run --project src/Domca.API
    ```
 3. The Blazor frontend will launch with the API.
 
