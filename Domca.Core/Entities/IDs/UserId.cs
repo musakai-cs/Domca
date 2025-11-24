@@ -1,5 +1,5 @@
-﻿using Domca.Core.Generators;
-using Domca.Core.Interfaces;
+﻿using Domca.Core.Abstractions;
+using Domca.Core.Generators;
 
 namespace Domca.Core.Entities.IDs;
 

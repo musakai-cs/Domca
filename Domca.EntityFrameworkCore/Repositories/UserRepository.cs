@@ -1,7 +1,7 @@
-﻿using Domca.Core.Repositories;
-using Domca.Core.Entities;
+﻿using Domca.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using Domca.Core.Entities.IDs;
+using Domca.Core.Repositories;
 
 namespace Domca.EntityFrameworkCore.Repositories;
 
