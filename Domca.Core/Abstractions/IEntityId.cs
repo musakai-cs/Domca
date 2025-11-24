@@ -1,4 +1,4 @@
-﻿namespace Domca.Core.Interfaces;
+﻿namespace Domca.Core.Abstractions;
 
 /// <summary>
 /// Defines a strongly-typed identifier for an entity, providing access to its underlying value and utility methods for
