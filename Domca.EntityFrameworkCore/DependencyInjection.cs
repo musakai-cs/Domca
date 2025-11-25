@@ -25,6 +25,8 @@ public static class DependencyInjection
     /// <returns>The same service collection instance with persistence services registered.</returns>
     public static IServiceCollection AddPersistence(this IServiceCollection services, string connectionString)
     {
+        ArgumentException.ThrowIfNullOrEmpty(connectionString, nameof(connectionString));
+
         services.AddDbContext<DataContext>(options =>
             options.UseSqlServer(connectionString));
 
