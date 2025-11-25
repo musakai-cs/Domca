@@ -30,14 +30,13 @@ Created as a personal wellness tool to monitor daily water intake with clarity a
 
 The solution consists of five modular projects:
 
-| Project                     | Purpose                                      |
-|-----------------------------|----------------------------------------------|
-| `Domca.API`                 | Web API                                      |
-| `Domca.Blazor`              | Blazor WebAssembly frontend                  |
-| `Domca.Core`                | Domain models, DTOs, interfaces, helpers     |
-| `Domca.EntityFrameworkCore` | EF Core setup and migrations                 |
-| `Domca.Repositories`        | Repository implementations                   |
-| `Domca.Tests`               | Unit tests and test data context             |
+| Project                     | Purpose                                                 |
+|-----------------------------|---------------------------------------------------------|
+| `Domca.API`                 | Web API                                                 |
+| `Domca.Blazor`              | Blazor WebAssembly frontend                             |
+| `Domca.Core`                | Domain models, interfaces, abstractions                 |
+| `Domca.EntityFrameworkCore` | EF Core setup, migrations, repositories                 |
+| `Domca.Tests`               | Unit tests and test data context                        |
 
 ---
 
@@ -50,7 +49,8 @@ The solution consists of five modular projects:
    ```bash
    dotnet restore
    dotnet build
-   dotnet run --project src/Domea.API
+   dotnet run --project src/Domca.API
+   ```
 3. The Blazor frontend will launch with the API.
 
 ### With Docker

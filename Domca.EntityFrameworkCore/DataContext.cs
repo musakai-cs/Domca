@@ -5,23 +5,16 @@ using Microsoft.EntityFrameworkCore;
 namespace Domca.EntityFrameworkCore;
 
 /// <summary>
-/// Represents a session with the database, allowing for querying and saving instances of entities.
+/// Represents the Entity Framework Core database context for managing users, user sessions, and hydration records.
 /// </summary>
-/// <remarks>This class is a sealed implementation of <see cref="DbContext"/> and is configured using the provided
-/// <see cref="DbContextOptions{DataContext}"/>. It is typically used to interact with the database in a strongly-typed
-/// manner, leveraging the Entity Framework Core ORM.</remarks>
-public sealed class DataContext : DbContext
+/// <remarks>Use this context to query and persist user, session, and hydration data within the application's
+/// database. The context tracks changes to entities and saves them to the database when SaveChanges is called. This
+/// class should be registered with dependency injection and disposed appropriately to manage database connections and
+/// resources.</remarks>
+/// <param name="options">The options to be used by the database context, including configuration such as the database provider, connection
+/// string, and other context behaviors.</param>
+public sealed class DataContext(DbContextOptions<DataContext> options) : DbContext(options)
 {
-    /// <summary>
-    /// Initializes a new instance of the <see cref="DataContext"/> class using the specified options.
-    /// </summary>
-    /// <remarks>The <paramref name="options"/> parameter allows configuration of the database context, such
-    /// as the connection string and database provider.</remarks>
-    /// <param name="options">The options to be used by the <see cref="DataContext"/>. This parameter is required and cannot be null.</param>
-    public DataContext(DbContextOptions<DataContext> options) : base(options)
-    {
-    }
-
     /// <summary>
     /// Gets or sets the collection of users in the database context.
     /// </summary>
