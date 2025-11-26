@@ -83,7 +83,7 @@ public sealed class UserRepository(DataContext context) : IUserRepository
     /// </summary>
     /// <remarks>Changes made to the user entity are not persisted to the database until SaveChanges is called
     /// on the context.</remarks>
-    /// <param name="user">The user to remove from the context. </param>
+    /// <param name="user">The user to remove from the context.</param>
     public void Remove(User user) => context.Users.Remove(user);
 
     #endregion
