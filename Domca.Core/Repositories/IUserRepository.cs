@@ -29,7 +29,7 @@ public interface IUserRepository
     /// <param name="email">The email address of the user to retrieve. Cannot be null or empty.</param>
     /// <param name="cancellationToken">A cancellation token that can be used to cancel the operation.</param>
     /// <returns>A task that represents the asynchronous operation. The task result contains the user associated with the
-    /// specified email address, or null if no user is found.</returns>
+    /// specified email address, or <see langword="null"/> if no user is found.</returns>
     Task<User?> GetByEmailAsync(string email, CancellationToken cancellationToken = default);
 
     /// <summary>
