@@ -1,113 +1,90 @@
 ﻿using Domca.Core.Entities;
-using Microsoft.EntityFrameworkCore;
 using Domca.Core.Entities.IDs;
 using Domca.Core.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace Domca.EntityFrameworkCore.Repositories;
 
 /// <summary>
-/// Provides methods for managing user data in a database context.
+/// Provides methods for querying and managing user entities in the application's data store.
 /// </summary>
-/// <remarks>The <see cref="UserRepository"/> class offers asynchronous operations to create, retrieve, update,
-/// and delete user entities. It utilizes Entity Framework Core to interact with the database and includes related
-/// session data where applicable. Ensure that the <see cref="DataContext"/> is properly configured for asynchronous
-/// operations before using this repository.</remarks>
-/// <param name="context"></param>
+/// <remarks>This class is sealed and cannot be inherited. All operations are performed against the provided data
+/// context, and changes to user entities are not persisted until the context is saved.</remarks>
+/// <param name="context">The data context used to access and persist user information.</param>
 public sealed class UserRepository(DataContext context) : IUserRepository
 {
-    private readonly DataContext _context = context ?? throw new ArgumentNullException(nameof(context));
+    // Read Methods
+    #region Read Methods
 
     /// <summary>
-    /// Asynchronously retrieves a user by their unique identifier.
+    /// Asynchronously retrieves a user entity by its unique identifier.
     /// </summary>
-    /// <remarks>This method includes related session data in the result. Ensure that the database context is
-    /// properly configured to handle asynchronous operations.</remarks>
     /// <param name="id">The unique identifier of the user to retrieve.</param>
-    /// <returns>A task that represents the asynchronous operation. The task result contains the user with the specified
-    /// identifier, or <see langword="null"/> if no user is found.</returns>
-    public async Task<User?> GetByIdAsync(UserId id)
+    /// <param name="cancellationToken">A cancellation token that can be used to cancel the asynchronous operation.</param>
+    /// <returns>A task that represents the asynchronous operation. The task result contains the user entity if found; otherwise,
+    /// <see langword="null"/>.</returns>
+    public async Task<User?> GetByIdAsync(UserId id, CancellationToken cancellationToken = default)
     {
-        return await _context.Users
-            .Include(u => u.Sessions)
-            .FirstOrDefaultAsync(u => u.Id == id);
+        return await context.Users.FindAsync([id], cancellationToken);
     }
 
     /// <summary>
-    /// Asynchronously retrieves all users from the database, including their associated sessions.
+    /// Asynchronously retrieves a user whose normalized email address matches the specified value.
     /// </summary>
-    /// <remarks>This method uses Entity Framework Core to query the database and includes related session
-    /// data  for each user. Ensure that the database context is properly configured and connected before  calling this
-    /// method.</remarks>
-    /// <returns>A task that represents the asynchronous operation. The task result contains an  IEnumerable{T} of User objects,
-    /// each with their associated sessions.</returns>
-    public async Task<IEnumerable<User>> GetAllAsync()
+    /// <param name="email">The email address to search for. The comparison is case-insensitive and uses the normalized form of the email
+    /// address.</param>
+    /// <param name="cancellationToken">A cancellation token that can be used to cancel the asynchronous operation.</param>
+    /// <returns>A task that represents the asynchronous operation. The task result contains the user whose normalized email
+    /// address matches the specified value, or <see langword="null"/> if no such user is found.</returns>
+    public async Task<User?> GetByEmailAsync(string email, CancellationToken cancellationToken = default)
     {
-        return await _context.Users
-            .Include(u => u.Sessions)
-            .ToListAsync();
+        return await context.Users
+            .FirstOrDefaultAsync(u => u.EmailAddressNormalized == email.ToUpperInvariant(), cancellationToken);
     }
 
     /// <summary>
-    /// Asynchronously creates a new user in the database.
+    /// Asynchronously determines whether the specified email address is not already associated with an existing user.
     /// </summary>
-    /// <remarks>The user's email address is normalized before saving, and the creation and update timestamps
-    /// are set to the current UTC time.</remarks>
-    /// <param name="user">The user entity to be created. The <paramref name="user"/> object must have a valid email address.</param>
-    /// <returns>A task that represents the asynchronous operation.</returns>
-    public async Task CreateAsync(User user)
+    /// <remarks>The comparison is case-insensitive and uses the normalized form of the email address. This
+    /// method does not reserve the email address; concurrent operations may affect uniqueness.</remarks>
+    /// <param name="email">The email address to check for uniqueness. Cannot be null or empty.</param>
+    /// <param name="cancellationToken">A cancellation token that can be used to cancel the asynchronous operation.</param>
+    /// <returns>A task that represents the asynchronous operation. The task result is <see langword="true"/> if the email
+    /// address is unique; otherwise, <see langword="false"/>.</returns>
+    public async Task<bool> IsEmailUniqueAsync(string email, CancellationToken cancellationToken = default)
     {
-        user.EmailAddressNormalized = NormalizeEmail(user.EmailAddress);
-        user.CreatedAt = DateTime.UtcNow;
-        user.UpdatedAt = DateTime.UtcNow;
-
-        _context.Users.Add(user);
-        await _context.SaveChangesAsync();
+        return !await context.Users
+            .AnyAsync(u => u.EmailAddressNormalized == email.ToUpperInvariant(), cancellationToken);
     }
+
+    #endregion
+
+    // Write Methods
+    #region Write Methods
 
     /// <summary>
-    /// Updates the specified user's information in the database asynchronously.
+    /// Adds the specified user to the data context for insertion into the database.
     /// </summary>
-    /// <param name="user">The user entity containing updated information. The user's email address will be normalized, and the update
-    /// timestamp will be set to the current UTC time.</param>
-    /// <returns>A task that represents the asynchronous update operation.</returns>
-    public async Task UpdateAsync(User user)
-    {
-        user.EmailAddressNormalized = NormalizeEmail(user.EmailAddress);
-        user.UpdatedAt = DateTime.UtcNow;
-
-        _context.Users.Update(user);
-        await _context.SaveChangesAsync();
-    }
+    /// <remarks>Changes made to the user entity are not persisted to the database until SaveChanges is called
+    /// on the context.</remarks>
+    /// <param name="user">The user entity to add to the context.</param>
+    public void Add(User user) => context.Users.Add(user);
 
     /// <summary>
-    /// Asynchronously deletes a user with the specified identifier from the database.
+    /// Updates the specified user entity in the data context.
     /// </summary>
-    /// <remarks>If the user with the specified <paramref name="id"/> does not exist, no action is
-    /// taken.</remarks>
-    /// <param name="id">The unique identifier of the user to be deleted.</param>
-    /// <returns>A task that represents the asynchronous delete operation.</returns>
-    public async Task DeleteAsync(UserId id)
-    {
-        var user = await _context.Users.FindAsync(id);
-        if (user != null)
-        {
-            _context.Users.Remove(user);
-            await _context.SaveChangesAsync();
-        }
-    }
+    /// <remarks>Changes made to the user entity are not persisted to the database until SaveChanges is called
+    /// on the context.</remarks>
+    /// <param name="user">The user entity to update.</param>
+    public void Update(User user) => context.Users.Update(user);
 
     /// <summary>
-    /// Normalizes the specified email address by trimming whitespace and converting it to uppercase.
+    /// Removes the specified user from the data context.
     /// </summary>
-    /// <param name="email">The email address to normalize. Cannot be null or empty.</param>
-    /// <returns>The normalized email address in uppercase with no leading or trailing whitespace.</returns>
-    /// <exception cref="ArgumentException">Thrown if <paramref name="email"/> is null or empty.</exception>
-    private static string NormalizeEmail(string email)
-    {
-        if (string.IsNullOrWhiteSpace(email))
-        {
-            throw new ArgumentException("Email cannot be null or empty.", nameof(email));
-        }
-        return email.Trim().ToUpperInvariant();
-    }
+    /// <remarks>Changes made to the user entity are not persisted to the database until SaveChanges is called
+    /// on the context.</remarks>
+    /// <param name="user">The user to remove from the context.</param>
+    public void Remove(User user) => context.Users.Remove(user);
+
+    #endregion
 }
