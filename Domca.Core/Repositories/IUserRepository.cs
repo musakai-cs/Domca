@@ -59,9 +59,9 @@ public interface IUserRepository
     void Update(User user);
 
     /// <summary>
-    /// Removes the specified user from the collection.
+    /// Marks the specified user for removal from the database. Changes are not persisted until SaveChanges is called on the context.
     /// </summary>
-    /// <param name="user">The user to remove from the collection.</param>
+    /// <param name="user">The user to mark for removal from the database.</param>
     void Remove(User user);
 
     #endregion
