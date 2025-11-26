@@ -11,8 +11,8 @@ namespace Domca.Core.Repositories;
 /// appropriately.</remarks>
 public interface IUserRepository
 {
-    // Get Methods
-    #region Get Methods
+    // Read Methods
+    #region Read Methods
 
     /// <summary>
     /// Asynchronously retrieves a user by their unique identifier.
