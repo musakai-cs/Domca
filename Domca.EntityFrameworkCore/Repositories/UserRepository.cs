@@ -17,7 +17,7 @@ public sealed class UserRepository(DataContext context) : IUserRepository
     #region Read Methods
 
     /// <summary>
-    /// Asynchronously retrieves a user entity by its unique identifier.
+    /// Asynchronously retrieves a user entity by its unique identifier, including related data (Aggregate Root).
     /// </summary>
     /// <param name="id">The unique identifier of the user to retrieve.</param>
     /// <param name="cancellationToken">A cancellation token that can be used to cancel the asynchronous operation.</param>
@@ -25,7 +25,12 @@ public sealed class UserRepository(DataContext context) : IUserRepository
     /// <see langword="null"/>.</returns>
     public async Task<User?> GetByIdAsync(UserId id, CancellationToken cancellationToken = default)
     {
-        return await context.Users.FindAsync([id], cancellationToken);
+        var today = DateTime.UtcNow.Date;
+
+        return await context.Users
+            .Include(u => u.HydrationRecords.Where(r => r.Date >= today))
+            .Include(u => u.Sessions)
+            .FirstOrDefaultAsync(u => u.Id == id, cancellationToken);
     }
 
     /// <summary>
