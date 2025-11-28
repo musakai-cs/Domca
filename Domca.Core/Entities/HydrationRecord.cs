@@ -1,4 +1,5 @@
 ﻿using Domca.Core.Entities.IDs;
+using Domca.Core.Helpers;
 
 namespace Domca.Core.Entities;
 
@@ -14,7 +15,6 @@ namespace Domca.Core.Entities;
 /// <param name="date">The date and time when the water was consumed.</param>
 /// <param name="amountMl">The amount of water consumed in milliliters.</param>
 public sealed class HydrationRecord(
-    HydrationRecordId id,
     UserId userId,
     DateTime date,
     int amountMl)
@@ -26,7 +26,6 @@ public sealed class HydrationRecord(
     /// Passes dummy but VALID values to the primary constructor to bypass guard clauses.
     /// </summary>
     private HydrationRecord() : this(
-        HydrationRecordId.New(),
         UserId.New(),
         DateTime.UtcNow,
         1)
@@ -36,7 +35,7 @@ public sealed class HydrationRecord(
     /// <summary>
     /// Gets the unique identifier for this hydration record.
     /// </summary>
-    public HydrationRecordId Id { get; private set; } = id;
+    public HydrationRecordId Id { get; private set; } = HydrationRecordId.New();
 
     /// <summary>
     /// Gets the Foreign Key referencing the user who owns this record.
@@ -49,15 +48,15 @@ public sealed class HydrationRecord(
     public DateTime Date
     {
         get => _date;
-        private set => _date = EnsureUtc(value);
+        private set => _date = DateHelper.EnsureUtc(value);
     }
 
     /// <summary>
     /// Gets the total amount of water consumed in milliliters.
     /// </summary>
-    public int AmountMl { get; private set; } = amountMl > 0
+    public int AmountMl { get; private set; } = amountMl > 0 && amountMl < 10_000
         ? amountMl
-        : throw new ArgumentOutOfRangeException(nameof(amountMl), "Amount of water must be greater than zero.");
+        : throw new ArgumentOutOfRangeException(nameof(amountMl), "Amount of water must be between 1 and 10,000 millilitres.");
 
     // Navigation Properties
     #region Navigation Properties
@@ -68,18 +67,4 @@ public sealed class HydrationRecord(
     public User? User { get; private set; }
 
     #endregion
-
-    /// <summary>
-    /// Ensures that the DateTime is always stored as UTC.
-    /// </summary>
-    private static DateTime EnsureUtc(DateTime value)
-    {
-        if (value.Kind == DateTimeKind.Utc)
-            return value;
-
-        if (value.Kind == DateTimeKind.Local)
-            return value.ToUniversalTime();
-
-        return DateTime.SpecifyKind(value, DateTimeKind.Utc);
-    }
 }

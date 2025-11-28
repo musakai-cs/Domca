@@ -1,4 +1,5 @@
 ﻿using Domca.Core.Entities.IDs;
+using Domca.Core.Helpers;
 using System.ComponentModel.DataAnnotations;
 
 namespace Domca.Core.Entities;
@@ -18,7 +19,6 @@ namespace Domca.Core.Entities;
 /// <param name="passwordHash">The hashed password.</param>
 /// <param name="passwordSalt">The salt used for password hashing.</param>
 public sealed class User(
-    UserId id,
     string firstName,
     string lastName,
     string userName,
@@ -37,7 +37,6 @@ public sealed class User(
     /// Passes dummy but VALID values to the primary constructor to bypass guard clauses.
     /// </summary>
     private User() : this(
-        UserId.New(),
         "EF_DUMMY",
         "EF_DUMMY",
         "EF_DUMMY",
@@ -50,7 +49,7 @@ public sealed class User(
     /// <summary>
     /// Unique identifier for the user.
     /// </summary>
-    public UserId Id { get; private set; } = id;
+    public UserId Id { get; private set; } = UserId.New();
 
     /// <summary>
     /// Gets the first name of the user.
@@ -112,7 +111,7 @@ public sealed class User(
     public DateTime CreatedAt
     {
         get => _createdAt;
-        private set => _createdAt = EnsureUtc(value);
+        private set => _createdAt = DateHelper.EnsureUtc(value);
     }
 
     /// <summary>
@@ -121,7 +120,7 @@ public sealed class User(
     public DateTime UpdatedAt
     {
         get => _updatedAt;
-        private set => _updatedAt = EnsureUtc(value);
+        private set => _updatedAt = DateHelper.EnsureUtc(value);
     }
 
     /// <summary>
@@ -166,6 +165,7 @@ public sealed class User(
         if (EmailAddress.Equals(newEmail, StringComparison.OrdinalIgnoreCase))
             return;
 
+        // Add validation for existing email in the database.
         EmailAddress = newEmail;
         EmailAddressNormalized = newEmail.ToUpperInvariant();
 
@@ -182,6 +182,7 @@ public sealed class User(
         ArgumentException.ThrowIfNullOrWhiteSpace(newPasswordHash);
         ArgumentException.ThrowIfNullOrWhiteSpace(newPasswordSalt);
 
+        // Will be fixed in Authentication task.
         PasswordHash = newPasswordHash;
         PasswordSalt = newPasswordSalt;
 
@@ -195,6 +196,10 @@ public sealed class User(
     public void AddSession(UserSession session)
     {
         ArgumentNullException.ThrowIfNull(session);
+
+        if (session.UserId != Id)
+            throw new ArgumentException("Session does not belong to this user.", nameof(session));
+
         _sessions.Add(session);
     }
 
@@ -208,6 +213,10 @@ public sealed class User(
     public void LogHydration(HydrationRecord record)
     {
         ArgumentNullException.ThrowIfNull(record);
+
+        if(record.UserId != Id)
+            throw new ArgumentException("Hydration record does not belong to this user.", nameof(record));
+
         _hydrationRecords.Add(record);
         UpdateTimestamp();
     }
@@ -216,21 +225,6 @@ public sealed class User(
     /// Updates the LastModified timestamp to current UTC time.
     /// </summary>
     private void UpdateTimestamp() => UpdatedAt = DateTime.UtcNow;
-
-
-    /// <summary>
-    /// Ensures that the DateTime is always stored as UTC.
-    /// </summary>
-    private static DateTime EnsureUtc(DateTime value)
-    {
-        if (value.Kind == DateTimeKind.Utc)
-            return value;
-
-        if (value.Kind == DateTimeKind.Local)
-            return value.ToUniversalTime();
-
-        return DateTime.SpecifyKind(value, DateTimeKind.Utc);
-    }
 
     #endregion
 }

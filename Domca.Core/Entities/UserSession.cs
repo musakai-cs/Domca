@@ -1,4 +1,5 @@
 ﻿using Domca.Core.Entities.IDs;
+using Domca.Core.Helpers;
 
 namespace Domca.Core.Entities;
 
@@ -61,7 +62,7 @@ public sealed class UserSession(
     public DateTime CreatedAt
     {
         get => _createdAt;
-        private set => _createdAt = EnsureUtc(value);
+        private set => _createdAt = DateHelper.EnsureUtc(value);
     }
 
     /// <summary>
@@ -70,7 +71,7 @@ public sealed class UserSession(
     public DateTime ExpiresAt
     {
         get => _expiresAt;
-        private set => _expiresAt = EnsureUtc(value);
+        private set => _expiresAt = DateHelper.EnsureUtc(value);
     }
 
     /// <summary>
@@ -124,7 +125,7 @@ public sealed class UserSession(
     /// <param name="newExpiration">The new expiration date.</param>
     public void ExtendValidity(DateTime newExpiration)
     {
-        var utcNewExpiration = EnsureUtc(newExpiration);
+        var utcNewExpiration = DateHelper.EnsureUtc(newExpiration);
 
         if (utcNewExpiration <= CreatedAt)
         {
@@ -137,20 +138,6 @@ public sealed class UserSession(
         }
 
         ExpiresAt = utcNewExpiration;
-    }
-
-    /// <summary>
-    /// Ensures that the DateTime is always stored as UTC.
-    /// </summary>
-    private static DateTime EnsureUtc(DateTime value)
-    {
-        if (value.Kind == DateTimeKind.Utc)
-            return value;
-
-        if (value.Kind == DateTimeKind.Local)
-            return value.ToUniversalTime();
-
-        return DateTime.SpecifyKind(value, DateTimeKind.Utc);
     }
 
     #endregion
