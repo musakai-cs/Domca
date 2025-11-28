@@ -17,5 +17,5 @@ public interface IUnitOfWork
     /// <param name="cancellationToken">A cancellation token that can be used to cancel the save operation. The default value is <see
     /// cref="CancellationToken.None"/>.</param>
     /// <returns>A task that represents the asynchronous save operation.</returns>
-    Task SaveChangesAsync(CancellationToken cancellationToken = default);
+    Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }
