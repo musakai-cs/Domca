@@ -9,7 +9,7 @@ namespace Domca.EntityFrameworkCore.Repositories;
 /// Provides access to hydration-related data operations using the specified data context.
 /// </summary>
 /// <param name="context">The data context used to interact with the underlying hydration data store. Cannot be null.</param>
-public class HydrationRepository(context context) : IHydrationRepository
+public class HydrationRepository(DataContext context) : IHydrationRepository
 {
     /// <summary>
     /// Asynchronously retrieves a hydration record by its unique identifier.
