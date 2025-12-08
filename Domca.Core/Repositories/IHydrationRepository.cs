@@ -4,7 +4,7 @@ using Domca.Core.Entities.IDs;
 namespace Domca.Core.Repositories;
 
 /// <summary>
-/// Defines a contract for managing and retrieving user hydration data within a repository.
+/// Defines a contract for managing and retrieving hydration records within a repository.
 /// </summary>
 /// <remarks>This interface provides asynchronous methods for querying user information and synchronous methods
 /// for adding, updating, and removing user records. Implementations are expected to handle data persistence and ensure
