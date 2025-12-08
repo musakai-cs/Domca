@@ -24,9 +24,7 @@ public sealed class UserRepository(DataContext context) : IUserRepository
     /// <returns>A task that represents the asynchronous operation. The task result contains the user entity if found; otherwise,
     /// <see langword="null"/>.</returns>
     public async Task<User?> GetByIdAsync(UserId id, CancellationToken cancellationToken = default)
-    {
-        return await context.Users.FindAsync([id], cancellationToken);
-    }
+        => await context.Users.FindAsync([id], cancellationToken);
 
     /// <summary>
     /// Asynchronously retrieves a user whose normalized email address matches the specified value.
@@ -37,10 +35,8 @@ public sealed class UserRepository(DataContext context) : IUserRepository
     /// <returns>A task that represents the asynchronous operation. The task result contains the user whose normalized email
     /// address matches the specified value, or <see langword="null"/> if no such user is found.</returns>
     public async Task<User?> GetByEmailAsync(string email, CancellationToken cancellationToken = default)
-    {
-        return await context.Users
-            .FirstOrDefaultAsync(u => u.EmailAddressNormalized == email.ToUpperInvariant(), cancellationToken);
-    }
+        => await context.Users
+                .FirstOrDefaultAsync(u => u.EmailAddressNormalized == email.ToUpperInvariant(), cancellationToken);
 
     /// <summary>
     /// Asynchronously determines whether the specified email address is not already associated with an existing user.
@@ -52,10 +48,8 @@ public sealed class UserRepository(DataContext context) : IUserRepository
     /// <returns>A task that represents the asynchronous operation. The task result is <see langword="true"/> if the email
     /// address is unique; otherwise, <see langword="false"/>.</returns>
     public async Task<bool> IsEmailUniqueAsync(string email, CancellationToken cancellationToken = default)
-    {
-        return !await context.Users
-            .AnyAsync(u => u.EmailAddressNormalized == email.ToUpperInvariant(), cancellationToken);
-    }
+        => await context.Users
+                .AnyAsync(u => u.EmailAddressNormalized == email.ToUpperInvariant(), cancellationToken);
 
     #endregion
 
