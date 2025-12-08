@@ -57,7 +57,7 @@ public class HydrationRepository(DataContext context) : IHydrationRepository
     /// <param name="cancellationToken">A cancellation token that can be used to cancel the asynchronous operation.</param>
     /// <returns>A list of hydration records for the specified user that fall within the week containing the reference date. The
     /// list is empty if no records are found.</returns>
-    public async Task<List<HydrationRecord>?> GetByUserForWeek(UserId id, DateTime referenceDate, CancellationToken cancellationToken = default)
+    public async Task<List<HydrationRecord>?> GetByUserForWeekAsync(UserId id, DateTime referenceDate, CancellationToken cancellationToken = default)
     {
         int diff = (7 + (referenceDate.DayOfWeek - DayOfWeek.Monday)) % 7;
 
