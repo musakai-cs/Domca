@@ -67,13 +67,13 @@ public interface IHydrationRepository
     Task<List<HydrationRecord>?> GetByUserForMonth(UserId id, int month, int year, CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// Retrieves all hydration records for the specified user and year.
+    /// Retrieves all hydration records for the specified user and year asynchronously.
     /// </summary>
     /// <param name="id">The unique identifier of the user whose hydration records are to be retrieved.</param>
     /// <param name="year">The year for which to retrieve hydration records. Must be a four-digit year.</param>
     /// <param name="cancellationToken">A cancellation token that can be used to cancel the asynchronous operation.</param>
     /// <returns>A list of hydration records for the specified user and year, or <see langword="null"/> if no records are found.</returns>
-    Task<List<HydrationRecord>?> GetByUserForYear(UserId id, int year, CancellationToken cancellationToken = default);
+    Task<List<HydrationRecord>?> GetByUserForYearAsync(UserId id, int year, CancellationToken cancellationToken = default);
 
     #endregion
 
