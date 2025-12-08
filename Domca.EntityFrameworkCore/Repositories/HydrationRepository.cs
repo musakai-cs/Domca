@@ -95,7 +95,7 @@ public class HydrationRepository(DataContext context) : IHydrationRepository
     /// <param name="year">The year for which to retrieve hydration records. Must be a four-digit year.</param>
     /// <param name="cancellationToken">A cancellation token that can be used to cancel the asynchronous operation.</param>
     /// <returns>A list of hydration records for the specified user and year, or <see langword="null"/> if no records are found.</returns>
-    public async Task<List<HydrationRecord>?> GetByUserForYear(UserId id, int year, CancellationToken cancellationToken = default)
+    public async Task<List<HydrationRecord>?> GetByUserForYearAsync(UserId id, int year, CancellationToken cancellationToken = default)
         => await context.HydrationRecords
             .Where(h => h.UserId == id
                     && h.Date.Year == year)
