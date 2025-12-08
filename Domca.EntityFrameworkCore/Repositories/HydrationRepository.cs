@@ -22,12 +22,12 @@ public class HydrationRepository(DataContext context) : IHydrationRepository
         => await context.HydrationRecords.FindAsync([id], cancellationToken);
 
     /// <summary>
-    /// Retrieves all hydration records associated with the specified user.
+    /// Asynchronously retrieves all hydration records associated with the specified user.
     /// </summary>
     /// <param name="id">The unique identifier of the user whose hydration records are to be retrieved.</param>
-    /// <param name="cancellationToken">A cancellation token that can be used to cancel the operation.</param>
-    /// <returns>A list of hydration records for the specified user. The list is empty if the user has no hydration records.</returns>
-    public async Task<List<HydrationRecord>?> GetByUser(UserId id, CancellationToken cancellationToken = default)
+    /// <param name="cancellationToken">A cancellation token that can be used to cancel the asynchronous operation.</param>
+    /// <returns>A task that represents the asynchronous operation. The task result contains a list of hydration records for the specified user. The list is empty if the user has no hydration records.</returns>
+    public async Task<List<HydrationRecord>?> GetByUserAsync(UserId id, CancellationToken cancellationToken = default)
         => await context.HydrationRecords
             .Where(h => h.UserId == id)
             .ToListAsync(cancellationToken);
