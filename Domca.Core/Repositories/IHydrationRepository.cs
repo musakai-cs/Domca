@@ -40,7 +40,7 @@ public interface IHydrationRepository
     /// <param name="id">The unique identifier of the user whose hydration records are to be retrieved.</param>
     /// <param name="cancellationToken">A cancellation token that can be used to cancel the operation.</param>
     /// <returns>A list of hydration records for the specified user. The list is empty if the user has no hydration records.</returns>
-    Task<List<HydrationRecord>?> GetByUserForToday(UserId id, CancellationToken cancellationToken = default);
+    Task<List<HydrationRecord>?> GetByUserForTodayAsync(UserId id, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Retrieves all hydration records for the specified user within the week containing the given reference date.
