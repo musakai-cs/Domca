@@ -41,10 +41,10 @@ public class HydrationRepository(DataContext context) : IHydrationRepository
     /// <param name="cancellationToken">A cancellation token that can be used to cancel the asynchronous operation.</param>
     /// <returns>A list of hydration records for the specified user for today, or <see langword="null"/> if no records are found.</returns>
     public async Task<List<HydrationRecord>?> GetByUserForToday(UserId id, CancellationToken cancellationToken = default)
-    => await context.HydrationRecords
-        .Where(h => h.UserId == id
-                && h.Date.Date == DateTime.UtcNow.Date)
-        .ToListAsync(cancellationToken);
+        => await context.HydrationRecords
+            .Where(h => h.UserId == id
+                    && h.Date.Date == DateTime.UtcNow.Date)
+            .ToListAsync(cancellationToken);
 
     /// <summary>
     /// Retrieves all hydration records for the specified user within the week containing the given reference date.
