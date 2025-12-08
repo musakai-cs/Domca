@@ -23,7 +23,7 @@ public interface IHydrationRepository
     /// <param name="cancellationToken">A cancellation token that can be used to cancel the asynchronous operation.</param>
     /// <returns>A task that represents the asynchronous operation. The task result contains the hydration record if found;
     /// otherwise, null.</returns>
-    Task<HydrationRecord?> GetById(HydrationRecordId id, CancellationToken cancellationToken = default);
+    Task<HydrationRecord?> GetByIdAsync(HydrationRecordId id, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Retrieves the hydration record associated with the specified user, if one exists.
