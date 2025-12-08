@@ -33,14 +33,14 @@ public class HydrationRepository(DataContext context) : IHydrationRepository
             .ToListAsync(cancellationToken);
 
     /// <summary>
-    /// Retrieves all hydration records for the specified user that were created on the current UTC date.
+    /// Asynchronously retrieves all hydration records for the specified user that were created on the current UTC date.
     /// </summary>
     /// <remarks>The method compares record dates using UTC time. If called near midnight UTC, results may
     /// differ from local time expectations.</remarks>
     /// <param name="id">The unique identifier of the user whose hydration records are to be retrieved.</param>
     /// <param name="cancellationToken">A cancellation token that can be used to cancel the asynchronous operation.</param>
     /// <returns>A list of hydration records for the specified user for today, or <see langword="null"/> if no records are found.</returns>
-    public async Task<List<HydrationRecord>?> GetByUserForToday(UserId id, CancellationToken cancellationToken = default)
+    public async Task<List<HydrationRecord>?> GetByUserForTodayAsync(UserId id, CancellationToken cancellationToken = default)
         => await context.HydrationRecords
             .Where(h => h.UserId == id
                     && h.Date.Date == DateTime.UtcNow.Date)
