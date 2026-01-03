@@ -48,7 +48,7 @@ public sealed class UserRepository(DataContext context) : IUserRepository
     /// <returns>A task that represents the asynchronous operation. The task result is <see langword="true"/> if the email
     /// address is unique; otherwise, <see langword="false"/>.</returns>
     public async Task<bool> IsEmailUniqueAsync(string email, CancellationToken cancellationToken = default)
-        => await context.Users
+        => !await context.Users
                 .AnyAsync(u => u.EmailAddressNormalized == email.ToUpperInvariant(), cancellationToken);
 
     #endregion

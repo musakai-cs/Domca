@@ -18,7 +18,7 @@ public class HydrationRepository(DataContext context) : IHydrationRepository
     /// <param name="cancellationToken">A cancellation token that can be used to cancel the asynchronous operation.</param>
     /// <returns>A task that represents the asynchronous operation. The task result contains the hydration record if found;
     /// otherwise, null.</returns>
-    public async Task<HydrationRecord?> GetById(HydrationRecordId id, CancellationToken cancellationToken = default)
+    public async Task<HydrationRecord?> GetByIdAsync(HydrationRecordId id, CancellationToken cancellationToken = default)
         => await context.HydrationRecords.FindAsync([id], cancellationToken);
 
     /// <summary>
@@ -82,11 +82,11 @@ public class HydrationRepository(DataContext context) : IHydrationRepository
     /// <returns>A task that represents the asynchronous operation. The task result contains a list of hydration records for the
     /// specified user and month, or <see langword="null"/> if no records are found.</returns>
     public async Task<List<HydrationRecord>?> GetByUserForMonthAsync(UserId id, int month, int year, CancellationToken cancellationToken = default)
-    => await context.HydrationRecords
-        .Where(h => h.UserId == id
-                && h.Date.Month == month
-                && h.Date.Year == year)
-        .ToListAsync(cancellationToken);
+        => await context.HydrationRecords
+            .Where(h => h.UserId == id
+                    && h.Date.Month == month
+                    && h.Date.Year == year)
+            .ToListAsync(cancellationToken);
 
     /// <summary>
     /// Retrieves all hydration records for the specified user and year.

@@ -6,8 +6,8 @@ namespace Domca.Core.Repositories;
 /// <summary>
 /// Defines a contract for managing and retrieving hydration records within a repository.
 /// </summary>
-/// <remarks>This interface provides asynchronous methods for querying user information and synchronous methods
-/// for adding, updating, and removing user records. Implementations are expected to handle data persistence and ensure
+/// <remarks>This interface provides asynchronous methods for querying hydration record and synchronous methods
+/// for adding, updating, and removing hydration records. Implementations are expected to handle data persistence and ensure
 /// thread safety where appropriate. Methods that accept a <see cref="CancellationToken"/> allow callers to cancel
 /// ongoing operations, which is useful for long-running queries or when integrating with responsive
 /// applications.</remarks>
@@ -53,7 +53,7 @@ public interface IHydrationRepository
     /// <param name="cancellationToken">A cancellation token that can be used to cancel the asynchronous operation.</param>
     /// <returns>A list of hydration records for the specified user that fall within the week containing the reference date. The
     /// list is empty if no records are found.</returns>
-    Task<List<HydrationRecord>?> GetByUserForWeek(UserId id, DateTime referenceDate, CancellationToken cancellationToken = default);
+    Task<List<HydrationRecord>?> GetByUserForWeekAsync(UserId id, DateTime referenceDate, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Retrieves all hydration records for the specified user within the given month and year.
@@ -64,7 +64,7 @@ public interface IHydrationRepository
     /// <param name="cancellationToken">A cancellation token that can be used to cancel the asynchronous operation.</param>
     /// <returns>A task that represents the asynchronous operation. The task result contains a list of hydration records for the
     /// specified user and month, or <see langword="null"/> if no records are found.</returns>
-    Task<List<HydrationRecord>?> GetByUserForMonth(UserId id, int month, int year, CancellationToken cancellationToken = default);
+    Task<List<HydrationRecord>?> GetByUserForMonthAsync(UserId id, int month, int year, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Retrieves all hydration records for the specified user and year asynchronously.
