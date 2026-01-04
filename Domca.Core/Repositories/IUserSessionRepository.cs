@@ -35,7 +35,7 @@ public interface IUserSessionRepository
     /// Asynchronously retrieves all active (non-expired) sessions for a specific user.
     /// </summary>
     /// <param name="userId">The unique identifier of the user whose active sessions are to be retrieved.</param>
-    /// <param name="utcNow">The current UTC time, used to filter out expired sessions.</param>
+    /// <param name="utcNow">The current UTC time, used to filter out expired sessions. If <see langword="null"/>, the system clock (<see cref="DateTime.UtcNow"/>) is used.</param>
     /// <param name="cancellationToken">A cancellation token that can be used to cancel the asynchronous operation.</param>
     /// <returns>A task that represents the asynchronous operation. The task result contains a list of active user sessions for the
     /// specified user. The list is empty if no active sessions are found.</returns>
