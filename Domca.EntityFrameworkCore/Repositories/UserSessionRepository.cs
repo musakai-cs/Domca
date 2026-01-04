@@ -50,7 +50,7 @@ public sealed class UserSessionRepository(DataContext context) : IUserSessionRep
     /// specified user, or an empty list if no records are found.</returns>
     public async Task<List<UserSession>?> GetActiveByUserIdAsync(
         UserId userId,
-        DateTime? utcNow = null,
+        DateTime? utcNow = null, 
         CancellationToken cancellationToken = default)
     {
         var now = utcNow ?? DateTime.UtcNow;
