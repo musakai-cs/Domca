@@ -37,7 +37,7 @@ public interface IUserSessionRepository
     /// <param name="userId">The unique identifier of the user whose active sessions are to be retrieved.</param>
     /// <param name="cancellationToken">A cancellation token that can be used to cancel the asynchronous operation.</param>
     /// <returns>A task that represents the asynchronous operation. The task result contains a list of active user sessions for the
-    /// specified user. The list is empty or <see langword="null"/> if no active sessions are found.</returns>
+    /// specified user. The list is empty if no active sessions are found.</returns>
     Task<List<UserSession>?> GetActiveByUserIdAsync(UserId userId, CancellationToken cancellationToken = default);
 
     #endregion

@@ -41,13 +41,23 @@ public sealed class UserSessionRepository(DataContext context) : IUserSessionRep
     /// Asynchronously retrieves all active sessions for the specified user where the expiration date is in the future.
     /// </summary>
     /// <param name="userId">The unique identifier of the user.</param>
+    /// <param name="utcNow">
+    /// The current UTC time to use for filtering active sessions. If <see langword="null"/>, the system clock
+    /// (<see cref="DateTime.UtcNow"/>) is used.
+    /// </param>
     /// <param name="cancellationToken">A cancellation token that can be used to cancel the asynchronous operation.</param>
     /// <returns>A task that represents the asynchronous operation. The task result contains a list of active sessions for the
-    /// specified user, or <see langword="null"/> if no records are found.</returns>
-    public async Task<List<UserSession>?> GetActiveByUserIdAsync(UserId userId, CancellationToken cancellationToken = default)
-        => await context.UserSessions
-            .Where(s => s.UserId == userId && s.ExpiresAt > DateTime.UtcNow)
+    /// specified user, or an empty list if no records are found.</returns>
+    public async Task<List<UserSession>?> GetActiveByUserIdAsync(
+        UserId userId,
+        DateTime? utcNow = null,
+        CancellationToken cancellationToken = default)
+    {
+        var now = utcNow ?? DateTime.UtcNow;
+        return await context.UserSessions
+            .Where(s => s.UserId == userId && s.ExpiresAt > now)
             .ToListAsync(cancellationToken);
+    }
 
     #endregion
 
