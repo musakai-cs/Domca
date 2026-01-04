@@ -65,5 +65,17 @@ public interface IUserSessionRepository
     /// <param name="userSessions">The collection of user sessions to remove.</param>
     void RemoveRange(List<UserSession> userSessions);
 
+    /// <summary>
+    /// Asynchronously removes all sessions associated with a specific user directly from the database.
+    /// </summary>
+    /// <remarks>
+    /// This method uses a direct database command for performance efficiency. 
+    /// <b>Note:</b> This operation executes immediately and does not wait for <c>SaveChanges</c> to be called.
+    /// </remarks>
+    /// <param name="userId">The unique identifier of the user whose sessions should be removed.</param>
+    /// <param name="cancellationToken">A cancellation token that can be used to cancel the asynchronous operation.</param>
+    /// <returns>A task that represents the asynchronous operation.</returns>
+    Task RemoveAllByUserIdAsync(UserId userId, CancellationToken cancellationToken = default);
+
     #endregion
 }

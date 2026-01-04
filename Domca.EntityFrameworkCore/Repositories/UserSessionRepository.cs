@@ -85,5 +85,16 @@ public sealed class UserSessionRepository(DataContext context) : IUserSessionRep
     /// <param name="userSessions">The collection of user session entities to remove.</param>
     public void RemoveRange(List<UserSession> userSessions) => context.UserSessions.RemoveRange(userSessions);
 
+    /// <summary>
+    /// Asynchronously removes all sessions associated with a specific user directly from the database.
+    /// </summary>
+    /// <remarks>
+    /// Executes a bulk delete operation immediately. This is more efficient than retrieving and deleting entities individually.
+    /// </remarks>
+    public async Task RemoveAllByUserIdAsync(UserId userId, CancellationToken cancellationToken = default)
+        => await context.UserSessions
+            .Where(s => s.UserId == userId)
+            .ExecuteDeleteAsync(cancellationToken);
+
     #endregion
 }
